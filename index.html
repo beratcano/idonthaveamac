@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>idonthaveamac</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- WELCOME SCREEN -->
+  <div id="welcome" class="welcome">
+    <div class="welcome-content">
+      <div class="welcome-icon">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <rect width="80" height="80" rx="18" fill="#1a1a1a"/>
+          <circle cx="40" cy="32" r="12" stroke="white" stroke-width="2.5" fill="none"/>
+          <circle cx="40" cy="32" r="5" fill="white"/>
+          <rect x="18" y="50" width="44" height="6" rx="3" fill="white" opacity="0.6"/>
+          <rect x="18" y="60" width="44" height="4" rx="2" fill="white" opacity="0.3"/>
+        </svg>
+      </div>
+      <h1 class="welcome-title">idonthaveamac</h1>
+      <p class="welcome-subtitle">the photo booth experience, without the macbook</p>
+      <button id="enter-btn" class="welcome-btn">Enter</button>
+      <p class="welcome-note">camera access required for the full experience</p>
+    </div>
+  </div>
+
+  <!-- macOS DESKTOP -->
+  <div id="desktop" class="desktop hidden">
+
+    <!-- MENU BAR -->
+    <div class="menubar">
+      <div class="menubar-left">
+        <span class="apple-logo">&#63743;</span>
+        <span class="menubar-item active-app">Photo Booth</span>
+        <span class="menubar-item">File</span>
+        <span class="menubar-item">Edit</span>
+        <span class="menubar-item">View</span>
+        <span class="menubar-item">Window</span>
+        <span class="menubar-item" id="menubar-help">Help</span>
+      </div>
+      <div class="menubar-right">
+        <span class="menubar-icon">
+          <svg width="16" height="14" viewBox="0 0 20 14" fill="white"><rect x="1" y="3" width="18" height="10" rx="2" stroke="white" stroke-width="1.5" fill="none"/><rect x="3" y="5" width="13" height="6" rx="1" fill="white" opacity="0.7"/><rect x="19" y="6" width="2" height="4" rx="0.5" fill="white"/></svg>
+        </span>
+        <span class="menubar-icon" id="menubar-time"></span>
+      </div>
+    </div>
+
+    <!-- SETTINGS WINDOW (opened from dock) -->
+    <div id="settings-window" class="window settings-window hidden">
+      <div class="window-titlebar" id="settings-titlebar">
+        <div class="window-traffic-lights">
+          <span class="tl tl-close" id="settings-tl-close"></span>
+          <span class="tl tl-minimize"></span>
+          <span class="tl tl-maximize"></span>
+        </div>
+        <span class="window-title-text">System Settings</span>
+      </div>
+      <div class="settings-body">
+        <div class="settings-section">
+          <label class="settings-label">Dock Position</label>
+          <div class="dock-position-btns">
+            <button class="dock-pos-btn" data-pos="left">Left</button>
+            <button class="dock-pos-btn active" data-pos="bottom">Bottom</button>
+            <button class="dock-pos-btn" data-pos="right">Right</button>
+          </div>
+        </div>
+        <div class="settings-section">
+          <label class="settings-label">Wallpaper</label>
+          <div class="wallpaper-grid">
+            <button class="wallpaper-opt active" data-wall="sequoia" style="background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02)"></button>
+            <button class="wallpaper-opt" data-wall="sonoma" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483)"></button>
+            <button class="wallpaper-opt" data-wall="ventura" style="background: linear-gradient(135deg, #2c3e50, #3498db, #2ecc71)"></button>
+            <button class="wallpaper-opt" data-wall="monterey" style="background: linear-gradient(135deg, #667eea, #764ba2)"></button>
+            <button class="wallpaper-opt" data-wall="bigsur" style="background: linear-gradient(135deg, #fc5c7d, #6a82fb)"></button>
+            <button class="wallpaper-opt" data-wall="mojave-dark" style="background: linear-gradient(180deg, #0c0c1e, #1a1a3e, #2d1b69)"></button>
+          </div>
+          <label class="settings-label" style="margin-top: 10px">Custom Image</label>
+          <label class="upload-btn">
+            Upload
+            <input type="file" id="wallpaper-upload" accept="image/*" hidden>
+          </label>
+        </div>
+        <div class="settings-section settings-help-section">
+          <button id="settings-help-btn" class="settings-help-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+            Help
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HELP WINDOW -->
+    <div id="help-window" class="window help-window hidden">
+      <div class="window-titlebar" id="help-titlebar">
+        <div class="window-traffic-lights">
+          <span class="tl tl-close" id="help-tl-close"></span>
+          <span class="tl tl-minimize"></span>
+          <span class="tl tl-maximize"></span>
+        </div>
+        <span class="window-title-text">Help</span>
+      </div>
+      <div class="help-body">
+        <div class="help-hero">
+          <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
+            <rect width="80" height="80" rx="18" fill="#1a1a1a"/>
+            <circle cx="40" cy="32" r="12" stroke="white" stroke-width="2.5" fill="none"/>
+            <circle cx="40" cy="32" r="5" fill="white"/>
+            <rect x="18" y="50" width="44" height="6" rx="3" fill="white" opacity="0.6"/>
+            <rect x="18" y="60" width="44" height="4" rx="2" fill="white" opacity="0.3"/>
+          </svg>
+          <h2>idonthaveamac</h2>
+          <p class="help-version">the photo booth experience, without the macbook</p>
+        </div>
+        <div class="help-section">
+          <h3>Getting Started</h3>
+          <p>Click the camera area to enable your webcam, then use the shutter button to take photos.</p>
+        </div>
+        <div class="help-section">
+          <h3>Modes</h3>
+          <div class="help-item"><strong>Photo</strong> — Take a single photo with a 3-second countdown.</div>
+          <div class="help-item"><strong>Collage</strong> — Takes 4 consecutive photos and creates a 2x2 grid.</div>
+          <div class="help-item"><strong>Video</strong> — Coming soon... maybe.</div>
+        </div>
+        <div class="help-section">
+          <h3>Effects</h3>
+          <p>Click the <strong>Effects</strong> button to browse 9 live filters. Click any filter to apply it.</p>
+        </div>
+        <div class="help-section">
+          <h3>Your Photos</h3>
+          <p>Photos appear in the filmstrip at the bottom. Click a photo to preview it, or hover and press <strong>&times;</strong> to delete.</p>
+        </div>
+        <div class="help-section">
+          <h3>Customize</h3>
+          <p>Open <strong>System Settings</strong> from the dock to change wallpaper and dock position.</p>
+        </div>
+        <div class="help-section help-footer">
+          <p>Built with &#10084; for everyone who doesn't have a Mac.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO BOOTH WINDOW -->
+    <div id="photobooth" class="photobooth">
+      <!-- Titlebar -->
+      <div class="pb-titlebar" id="titlebar">
+        <div class="pb-traffic-lights">
+          <span class="tl tl-close" id="tl-close"></span>
+          <span class="tl tl-minimize"></span>
+          <span class="tl tl-maximize"></span>
+        </div>
+        <span class="pb-title">Photo Booth</span>
+      </div>
+
+      <!-- Camera area wrapper (keeps 4:3 ratio, filmstrip overlays bottom) -->
+      <div class="pb-camera-area">
+        <!-- Camera viewport -->
+        <div class="pb-viewport" id="pb-viewport">
+          <video id="camera" autoplay playsinline></video>
+          <div id="countdown-overlay" class="countdown-overlay hidden"></div>
+          <div id="flash" class="flash hidden"></div>
+          <div id="camera-placeholder" class="camera-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="rgba(255,255,255,0.25)"><path d="M12 15.2a3.2 3.2 0 100-6.4 3.2 3.2 0 000 6.4z"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+            <p>Click to enable camera</p>
+          </div>
+          <div id="collage-progress" class="collage-progress hidden"></div>
+        </div>
+
+        <!-- Effects grid view (3x3, replaces viewport) -->
+        <div id="effects-grid" class="effects-grid hidden">
+          <!-- 9 canvases rendered by JS -->
+        </div>
+
+        <!-- Video easter egg overlay -->
+        <div id="video-easter-egg" class="video-easter-egg hidden">
+          <p>yeah... i didn't want to spend time on this one lol</p>
+          <span class="easter-egg-sub">maybe in v2?</span>
+        </div>
+
+        <!-- Filmstrip overlaid at bottom of camera area -->
+        <div class="filmstrip" id="filmstrip"></div>
+      </div>
+
+      <!-- Bottom control bar -->
+      <div class="pb-controls">
+        <!-- Mode selector (left) -->
+        <div class="pb-modes">
+          <button class="pb-mode" data-mode="collage" title="Collage">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+          <button class="pb-mode active" data-mode="photo" title="Photo">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 10l2.5-3 2 2 1.5-2 2.5 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+          </button>
+          <button class="pb-mode" data-mode="video" title="Video">
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+              <rect x="1" y="2" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 5.5l4.5-2.5v8L12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Shutter button (center) -->
+        <button id="capture-btn" class="pb-shutter" disabled>
+          <div class="pb-shutter-inner">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <path d="M12 15.2a3.2 3.2 0 100-6.4 3.2 3.2 0 000 6.4z"/>
+              <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Effects button (right) -->
+        <button id="effects-toggle" class="pb-effects-btn">Effects</button>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox hidden">
+      <div class="lightbox-backdrop"></div>
+      <img id="lightbox-img" class="lightbox-img" alt="Preview">
+      <button id="lightbox-close" class="lightbox-close">&times;</button>
+      <button id="lightbox-download" class="lightbox-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>
+        Save
+      </button>
+    </div>
+
+    <!-- DOCK -->
+    <div id="dock" class="dock dock-bottom">
+      <div class="dock-items">
+        <div class="dock-item" title="Finder">
+          <div class="dock-icon"><img src="assets/finder.png" alt="Finder" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Safari">
+          <div class="dock-icon"><img src="assets/safari.png" alt="Safari" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Mail">
+          <div class="dock-icon"><img src="assets/mail.png" alt="Mail" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Maps">
+          <div class="dock-icon"><img src="assets/maps.png" alt="Maps" draggable="false"></div>
+        </div>
+        <div class="dock-item active-dock" title="Photo Booth" id="dock-photobooth">
+          <div class="dock-icon"><img src="assets/photobooth.png" alt="Photo Booth" draggable="false"></div>
+          <div class="dock-dot"></div>
+        </div>
+        <div class="dock-item" title="Messages">
+          <div class="dock-icon"><img src="assets/messages.png" alt="Messages" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Music">
+          <div class="dock-icon"><img src="assets/music.png" alt="Music" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Photos">
+          <div class="dock-icon"><img src="assets/photos.png" alt="Photos" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="Notes">
+          <div class="dock-icon"><img src="assets/notes.png" alt="Notes" draggable="false"></div>
+        </div>
+        <div class="dock-item" title="System Settings" id="dock-settings">
+          <div class="dock-icon"><img src="assets/settings.png" alt="Settings" draggable="false"></div>
+        </div>
+        <div class="dock-separator"></div>
+        <div class="dock-item" title="Trash">
+          <div class="dock-icon"><img src="assets/trash.png" alt="Trash" draggable="false"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hidden canvases for capture -->
+  <canvas id="capture-canvas" style="display:none"></canvas>
+  <canvas id="collage-canvas" style="display:none"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
